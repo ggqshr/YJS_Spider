@@ -90,12 +90,12 @@ ITEM_PIPELINES = {
 # HTTPCACHE_IGNORE_HTTP_CODES = []
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
+# 用来直接将item导出的
+# FEED_FORMAT = "csv"
+#
+# FEED_URI='./test.csv'
 
-FEED_FORMAT = "csv"
-
-FEED_URI='./test.csv'
-
-LOG_LEVEL=INFO
+LOG_LEVEL = INFO
 
 from scrapy.utils.log import configure_logging
 import logging
@@ -109,7 +109,8 @@ if not os.path.exists("./logs"):
 configure_logging(install_root_handler=False)
 logging.basicConfig(
     level=logging.DEBUG,
-    handlers=[RotatingFileHandler(filename='logs/Liepin{}.log'.format(datetime.now().strftime("%Y.%m.%d")),encoding='utf-8')]
+    handlers=[
+        RotatingFileHandler(filename='logs/Liepin{}.log'.format(datetime.now().strftime("%Y.%m.%d")), encoding='utf-8')]
 )
 
 REDIS_HOST = "116.56.140.202"
@@ -123,4 +124,5 @@ MONGODB_PORT = 27017
 apiUrl = "http://api.xdaili.cn/xdaili-api//greatRecharge/getGreatIp?spiderId=d460f14ed5ae426e8a7164005c61b9e7&orderno=YZ20196121637TQppQw&returnType=1&count=3"
 
 from threading import Lock
+
 lock = Lock()
