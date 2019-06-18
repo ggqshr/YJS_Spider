@@ -84,7 +84,7 @@ class YjsSpider(scrapy.Spider):
         item_loader.add_value("place", tag.split("|")[-1] if tag != "" else "空")
         item_loader.add_xpath("company_name", "//div[contains(@class,'mleft')]/h1/text()")
         item_loader.add_xpath("post_time", "//div[contains(@class,'info clearfix')]/ol/li[text()='发布时间：']/u/text()")
-        item_loader.add_xpath("job_nuture", "//div[contains(@class,'info clearfix')]/ol/li[text()='职位类型：']/u/text()")
+        item_loader.add_xpath("job_nature", "//div[contains(@class,'info clearfix')]/ol/li[text()='职位类型：']/u/text()")
         item_loader.add_xpath("job_place", "//div[contains(@class,'info clearfix')]/ol/li[text()='工作地点：']/u/text()")
         item_loader.add_value("job_content",
                               response.xpath("//div[contains(@class,'job')]").xpath("string(.)").extract_first(""))

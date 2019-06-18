@@ -122,7 +122,7 @@ class YjsItem(scrapy.Item):
     company_name = scrapy.Field()
     post_time = scrapy.Field()
     job_place = scrapy.Field()
-    job_nuture = scrapy.Field()
+    job_nature = scrapy.Field()
     job_content = scrapy.Field(input_processor=MapCompose(replace_all_n))
     company_homepage = scrapy.Field()
     company_size = scrapy.Field()
