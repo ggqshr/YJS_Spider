@@ -12,7 +12,7 @@ from pymongo import MongoClient
 from .settings import REDIS_PORT, REDIS_HOST, MODE, MONGODB_HOST, MONGODB_PORT
 import redis as r
 
-LOCAL = "127.0.01"
+LOCAL = "127.0.0.1"
 
 
 class YjsPipeline(object):
