@@ -121,6 +121,7 @@ class MyproxiesSpiderMiddleware(object):
             # 当失败不是很多的时候，将失败较多的ip去掉，提高效率,并把去掉的ip加入到set中
             if self.timeOutCount % 5 == 0:
                 count_ip = Counter(self.time_out_ip)
+                spider.logger.info(f"most time out ip is {count_ip}")
                 bad_ip = count_ip.most_common(1)[0][0]
                 if bad_ip in data.IPPOOL:
                     self.bad_ip_set.add(request.meta['proxy'])
