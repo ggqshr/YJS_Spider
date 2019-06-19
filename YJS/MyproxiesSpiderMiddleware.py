@@ -111,8 +111,10 @@ class MyproxiesSpiderMiddleware(object):
 
     def process_exception(self, request, exception, spider):
         if isinstance(exception, (ConnectionRefusedError, TCPTimedOutError, TimeoutError)):
-            self.time_out_ip.append(request.meta['proxy'].replace("http://", ""))
-            self.timeOutCount += 1
+            # 在刚更新完代理池后，现在遇到的错误都是使用更新代理池之前的旧ip，等这些ip被释放完，在进行累计
+            if not self.reset_set:
+                self.time_out_ip.append(request.meta['proxy'].replace("http://", ""))
+                self.timeOutCount += 1
 
             spider.logger.info(f"get timeout {self.timeOutCount}")
 
