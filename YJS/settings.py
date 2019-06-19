@@ -110,7 +110,7 @@ configure_logging(install_root_handler=False)
 logging.basicConfig(
     level=logging.DEBUG,
     handlers=[
-        RotatingFileHandler(filename='logs/Liepin{}.log'.format(datetime.now().strftime("%Y.%m.%d")), encoding='utf-8')]
+        RotatingFileHandler(filename='logs/YJS{}.log'.format(datetime.now().strftime("%Y.%m.%d")), encoding='utf-8')]
 )
 
 REDIS_HOST = "116.56.140.202"

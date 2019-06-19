@@ -16,15 +16,15 @@ class YjsSpider(scrapy.Spider):
         'http://s.yingjiesheng.com/search.php?word=%E7%A0%94%E5%8F%91+-%E5%9C%B0%E4%BA%A7+-%E9%94%80%E5%94%AE+%E6%A0%A1%E6%8B%9B&start=0&sort=date',
         'http://s.yingjiesheng.com/search.php?word=%E7%A0%94%E5%8F%91+-%E5%9C%B0%E4%BA%A7+-%E9%94%80%E5%94%AE+%E6%A0%A1%E5%9B%AD%E6%8B%9B%E8%81%98&start=0&sort=date',
         'http://s.yingjiesheng.com/search.php?word=%E5%BC%80%E5%8F%91+-%E5%9C%B0%E4%BA%A7+-%E9%94%80%E5%94%AE&area=0&sort=date',
-        'http://s.yingjiesheng.com/search.php?word=&area=1999&jobterm=0&do=1&stype=0',
-        'http://s.yingjiesheng.com/search.php?word=&area=1349&jobterm=0&do=1&stype=0',
-        'http://s.yingjiesheng.com/search.php?word=&area=1056&jobterm=0&do=1&stype=0',
-        'http://s.yingjiesheng.com/search.php?word=&area=1085&jobterm=0&do=1&stype=0',
-        'http://s.yingjiesheng.com/search.php?word=&area=1102&jobterm=0&do=1&stype=0',
-        'http://s.yingjiesheng.com/search.php?word=&area=1186&jobterm=0&do=1&stype=0',
-        'http://s.yingjiesheng.com/search.php?word=&area=1217&jobterm=0&do=1&stype=0',
-        'http://s.yingjiesheng.com/search.php?word=&area=1376&jobterm=0&do=1&stype=0',
-        'http://s.yingjiesheng.com/search.php?word=&area=1352&jobterm=0&do=1&stype=0',
+        'http://s.yingjiesheng.com/search.php?word=&area=1999&jobterm=0&do=1&stype=0&sort=date',
+        'http://s.yingjiesheng.com/search.php?word=&area=1349&jobterm=0&do=1&stype=0&sort=date',
+        'http://s.yingjiesheng.com/search.php?word=&area=1056&jobterm=0&do=1&stype=0&sort=date',
+        'http://s.yingjiesheng.com/search.php?word=&area=1085&jobterm=0&do=1&stype=0&sort=date',
+        'http://s.yingjiesheng.com/search.php?word=&area=1102&jobterm=0&do=1&stype=0&sort=date',
+        'http://s.yingjiesheng.com/search.php?word=&area=1186&jobterm=0&do=1&stype=0&sort=date',
+        'http://s.yingjiesheng.com/search.php?word=&area=1217&jobterm=0&do=1&stype=0&sort=date',
+        'http://s.yingjiesheng.com/search.php?word=&area=1376&jobterm=0&do=1&stype=0&sort=date',
+        'http://s.yingjiesheng.com/search.php?word=&area=1352&jobterm=0&do=1&stype=0&sort=date',
     ]
 
     # 列表页数据获取
@@ -61,10 +61,10 @@ class YjsSpider(scrapy.Spider):
             if title != "":
                 if type:
                     yield Request(url=parse.urljoin(response.url, post_url),
-                                  meta={"title": title, "tag": tag, "type": type}, callback=self.pars_self)
+                                  meta={"title": title, "tag": tag, "type": type,'dont_retry':True}, callback=self.pars_self)
                 else:
                     yield Request(url=parse.urljoin(response.url, post_url),
-                                  meta={"title": title, "tag": tag, "type": type}, callback=self.pars_other)
+                                  meta={"title": title, "tag": tag, "type": type,'dont_retry':True}, callback=self.pars_other)
 
             # 变量初始化
             title_selector = ''
@@ -133,7 +133,7 @@ class YjsSpider(scrapy.Spider):
                               time.strftime("%Y-%m-%d", timeformat) if valid_date is not None else "空")
         item_loader.add_xpath("job_number",
                               "//div[contains(@class,'main')]/div[2]/div[contains(@class,'job_list')]/ul/li[3]/span/text()")
-        item_loader.add_xpath("job_nuture",
+        item_loader.add_xpath("job_nature",
                               "//div[contains(@class,'main')]/div[2]/div[contains(@class,'job_list')]/ul/li[4]/text()")
         item_loader.add_value("job_content", response.xpath(
             "//div[contains(@class,'main')]/div[2]/div[contains(@class,'job_list')]/div[contains(@class,'j_i')]").xpath(
