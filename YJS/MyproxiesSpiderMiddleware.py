@@ -98,7 +98,7 @@ class MyproxiesSpiderMiddleware(object):
                 lock.release()
                 self.bad_code_count = 0
                 self.reset_set = False
-                spider.logger.info("lock release");
+                spider.logger.info("lock release")
 
         if response.status == 408 or response.status == 502 or response.status == 503:
             self.bad_ip_set.add(request.meta['proxy'])
