@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
 from typing import List
 
 import scrapy
@@ -6,6 +7,9 @@ from scrapy.http import Request
 from urllib import parse
 import time
 from YJS.items import YjsItemLoader, YjsOtherItem, YjsSelfItem, YjsItem
+import pysnooper
+import locale
+locale.setlocale(locale.LC_CTYPE, 'chinese')
 
 class YjsSpider(scrapy.Spider):
     name = 'yjs'
@@ -61,10 +65,12 @@ class YjsSpider(scrapy.Spider):
             if title != "":
                 if type:
                     yield Request(url=parse.urljoin(response.url, post_url),
-                                  meta={"title": title, "tag": tag, "type": type,'dont_retry':True}, callback=self.pars_self)
+                                  meta={"title": title, "tag": tag, "type": type, 'dont_retry': True},
+                                  callback=self.pars_self)
                 else:
                     yield Request(url=parse.urljoin(response.url, post_url),
-                                  meta={"title": title, "tag": tag, "type": type,'dont_retry':True}, callback=self.pars_other)
+                                  meta={"title": title, "tag": tag, "type": type, 'dont_retry': True},
+                                  callback=self.pars_other)
 
             # 变量初始化
             title_selector = ''
@@ -130,7 +136,7 @@ class YjsSpider(scrapy.Spider):
             "//div[contains(@class,'main')]/div[2]/div[contains(@class,'job_list')]/ul/li[2]/span/text()").extract_first()
         timeformat = time.strptime(valid_date.split("至")[-2].strip(), "%Y年%m月%d日") if valid_date is not None else "空"
         item_loader.add_value("post_time",
-                              time.strftime("%Y-%m-%d", timeformat) if valid_date is not None else "空")
+                              time.strftime("%Y-%m-%d", timeformat) if valid_date is not None else datetime.now().strftime("%Y-%m-%d"))
         item_loader.add_xpath("job_number",
                               "//div[contains(@class,'main')]/div[2]/div[contains(@class,'job_list')]/ul/li[3]/span/text()")
         item_loader.add_xpath("job_nature",

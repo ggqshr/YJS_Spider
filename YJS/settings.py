@@ -110,13 +110,14 @@ configure_logging(install_root_handler=False)
 logging.basicConfig(
     level=logging.DEBUG,
     handlers=[
-        RotatingFileHandler(filename='logs/YJS{}.log'.format(datetime.now().strftime("%Y.%m.%d")), encoding='utf-8')]
+        RotatingFileHandler(filename='logs/YJS{}.log'.format(datetime.now().strftime("%Y.%m.%d")), encoding='utf-8')],
+    format='%(asctime)s %(name)s %(levelname)s %(message)s'
 )
 
 REDIS_HOST = "116.56.140.202"
 REDIS_PORT = 6379
 
-MODE = "YAO"  # or YAO
+MODE = "LOCAL"  # or YAO
 
 MONGODB_HOST = "116.56.140.202"
 MONGODB_PORT = 27017

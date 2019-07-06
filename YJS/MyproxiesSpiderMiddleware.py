@@ -120,7 +120,7 @@ class MyproxiesSpiderMiddleware(object):
             spider.logger.info(f"get timeout {self.timeOutCount}")
 
             # 当失败不是很多的时候，将失败较多的ip去掉，提高效率,并把去掉的ip加入到set中
-            if self.timeOutCount % 5 == 0:
+            if self.timeOutCount % 5 == 0 and self.timeOutCount!=0:
                 count_ip = Counter(self.time_out_ip)
                 spider.logger.info(f"most time out ip is {count_ip}")
                 bad_ip = count_ip.most_common(1)[0][0]
@@ -143,6 +143,7 @@ class MyproxiesSpiderMiddleware(object):
                 self.bad_ip_set.clear()
                 spider.logger.info("reset ip pool due to bad network")
                 self.timeOutCount = 0
+                self.time_out_ip.clear()
 
         spider.logger.warn(f"{exception}")
         thisip = random.choice(data.IPPOOL)

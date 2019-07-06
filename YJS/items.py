@@ -4,6 +4,7 @@
 #
 # See documentation in:
 # http://doc.scrapy.org/en/latest/topics/items.html
+from datetime import datetime
 from typing import List
 
 import scrapy
@@ -64,15 +65,23 @@ def parse(s, loader_context):
     # return s if len(s) != 0 else ["空"]
 
 
-def test_past(x):
+def t_past(x):
     if x is None:
         return "空"
     return x
 
 
+def process_time(x):
+    if len(x) == 0:
+        return [datetime.now().strftime("%Y-%m-%d")]
+    if x is str:
+        return [x]
+    return x
+
+
 class YjsItemLoader(ItemLoader):
     # 自定义itemloader
-    default_output_processor = Compose(TakeFirst(), test_past)
+    default_output_processor = Compose(TakeFirst(), t_past)
 
 
 class YjsSelfItem(scrapy.Item):
@@ -120,7 +129,7 @@ class YjsItem(scrapy.Item):
     link = scrapy.Field()
     job_name = scrapy.Field(input_processor=Join())
     company_name = scrapy.Field()
-    post_time = scrapy.Field()
+    post_time = scrapy.Field(output_processor=Compose(process_time, TakeFirst()))
     job_place = scrapy.Field()
     job_nature = scrapy.Field()
     job_content = scrapy.Field(input_processor=MapCompose(replace_all_n))
