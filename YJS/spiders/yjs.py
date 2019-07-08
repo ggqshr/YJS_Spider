@@ -9,12 +9,15 @@ import time
 from YJS.items import YjsItemLoader, YjsOtherItem, YjsSelfItem, YjsItem
 import pysnooper
 import locale
+import random
+
 locale.setlocale(locale.LC_CTYPE, 'chinese')
+
 
 class YjsSpider(scrapy.Spider):
     name = 'yjs'
     allowed_domains = ['yingjiesheng.com']
-    start_urls = [
+    start_url = [
         'http://s.yingjiesheng.com/search.php?word=%E5%BC%80%E5%8F%91+-%E5%9C%B0%E4%BA%A7+-%E9%94%80%E5%94%AE+%E6%A0%A1%E6%8B%9B&start=0&sort=date',
         'http://s.yingjiesheng.com/search.php?word=%E5%BC%80%E5%8F%91+-%E5%9C%B0%E4%BA%A7+-%E9%94%80%E5%94%AE+%E6%A0%A1%E5%9B%AD%E6%8B%9B%E8%81%98&start=0&sort=date',
         'http://s.yingjiesheng.com/search.php?word=%E7%A0%94%E5%8F%91+-%E5%9C%B0%E4%BA%A7+-%E9%94%80%E5%94%AE+%E6%A0%A1%E6%8B%9B&start=0&sort=date',
@@ -30,6 +33,12 @@ class YjsSpider(scrapy.Spider):
         'http://s.yingjiesheng.com/search.php?word=&area=1376&jobterm=0&do=1&stype=0&sort=date',
         'http://s.yingjiesheng.com/search.php?word=&area=1352&jobterm=0&do=1&stype=0&sort=date',
     ]
+
+    def start_requests(self):
+        for page in self.start_url:
+            yield Request(
+                url=page,
+            )
 
     # 列表页数据获取
     def parse(self, response):
@@ -98,8 +107,12 @@ class YjsSpider(scrapy.Spider):
         post_time = item_loader.get_output_value("post_time") if item_loader.get_output_value(
             "post_time") is not None else time.ctime()
         company_name = item_loader.get_output_value("company_name")
-        item_loader.add_value("id", company_name if company_name is not None else "空" + item_loader.get_output_value(
-            "job_name") + post_time)
+        try:
+            item_loader.add_value("id",
+                                  company_name if company_name is not None else "空" + item_loader.get_output_value(
+                                      "job_name") + post_time)
+        except TypeError:
+            item_loader.add_value("id", random.random())
         yjs_other_item = item_loader.load_item()
         # 将没有字段设置默认值
         for f in yjs_other_item.fields.keys():
@@ -136,7 +149,9 @@ class YjsSpider(scrapy.Spider):
             "//div[contains(@class,'main')]/div[2]/div[contains(@class,'job_list')]/ul/li[2]/span/text()").extract_first()
         timeformat = time.strptime(valid_date.split("至")[-2].strip(), "%Y年%m月%d日") if valid_date is not None else "空"
         item_loader.add_value("post_time",
-                              time.strftime("%Y-%m-%d", timeformat) if valid_date is not None else datetime.now().strftime("%Y-%m-%d"))
+                              time.strftime("%Y-%m-%d",
+                                            timeformat) if valid_date is not None else datetime.now().strftime(
+                                  "%Y-%m-%d"))
         item_loader.add_xpath("job_number",
                               "//div[contains(@class,'main')]/div[2]/div[contains(@class,'job_list')]/ul/li[3]/span/text()")
         item_loader.add_xpath("job_nature",
@@ -146,7 +161,10 @@ class YjsSpider(scrapy.Spider):
             "string(.)").extract_first())
         item_loader.add_value("company_intro", company_intro)
         item_loader.add_xpath("company_homepage", "//div[contains(@class,'main')]/div[4]/ul/li/a/text()")
-        item_loader.add_value("id", item_loader.get_output_value("company_name") + item_loader.get_output_value(
-            "job_name") + item_loader.get_output_value("post_time"))
+        try:
+            item_loader.add_value("id", item_loader.get_output_value("company_name") + item_loader.get_output_value(
+                "job_name") + item_loader.get_output_value("post_time"))
+        except TypeError:
+            item_loader.add_value("id", str(random.random()))
         yjs_self_item = item_loader.load_item()
         yield yjs_self_item
