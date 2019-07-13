@@ -17,23 +17,69 @@ locale.setlocale(locale.LC_CTYPE, 'chinese')
 class YjsSpider(scrapy.Spider):
     name = 'yjs'
     allowed_domains = ['yingjiesheng.com']
-    start_url = [
-        'http://s.yingjiesheng.com/search.php?word=%E5%BC%80%E5%8F%91+-%E5%9C%B0%E4%BA%A7+-%E9%94%80%E5%94%AE+%E6%A0%A1%E6%8B%9B&start=0&sort=date',
-        'http://s.yingjiesheng.com/search.php?word=%E5%BC%80%E5%8F%91+-%E5%9C%B0%E4%BA%A7+-%E9%94%80%E5%94%AE+%E6%A0%A1%E5%9B%AD%E6%8B%9B%E8%81%98&start=0&sort=date',
-        'http://s.yingjiesheng.com/search.php?word=%E7%A0%94%E5%8F%91+-%E5%9C%B0%E4%BA%A7+-%E9%94%80%E5%94%AE+%E6%A0%A1%E6%8B%9B&start=0&sort=date',
-        'http://s.yingjiesheng.com/search.php?word=%E7%A0%94%E5%8F%91+-%E5%9C%B0%E4%BA%A7+-%E9%94%80%E5%94%AE+%E6%A0%A1%E5%9B%AD%E6%8B%9B%E8%81%98&start=0&sort=date',
-        'http://s.yingjiesheng.com/search.php?word=%E5%BC%80%E5%8F%91+-%E5%9C%B0%E4%BA%A7+-%E9%94%80%E5%94%AE&area=0&sort=date',
-        'http://s.yingjiesheng.com/search.php?word=&area=1999&jobterm=0&do=1&stype=0&sort=date',
-        'http://s.yingjiesheng.com/search.php?word=&area=1349&jobterm=0&do=1&stype=0&sort=date',
-        'http://s.yingjiesheng.com/search.php?word=&area=1056&jobterm=0&do=1&stype=0&sort=date',
-        'http://s.yingjiesheng.com/search.php?word=&area=1085&jobterm=0&do=1&stype=0&sort=date',
-        'http://s.yingjiesheng.com/search.php?word=&area=1102&jobterm=0&do=1&stype=0&sort=date',
-        'http://s.yingjiesheng.com/search.php?word=&area=1186&jobterm=0&do=1&stype=0&sort=date',
-        'http://s.yingjiesheng.com/search.php?word=&area=1217&jobterm=0&do=1&stype=0&sort=date',
-        'http://s.yingjiesheng.com/search.php?word=&area=1376&jobterm=0&do=1&stype=0&sort=date',
-        'http://s.yingjiesheng.com/search.php?word=&area=1352&jobterm=0&do=1&stype=0&sort=date',
-    ]
 
+    start_url = [
+        'http://s.yingjiesheng.com/search.php?word=&area=1999&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=1349&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=1056&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=1085&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=1102&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=1186&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=1217&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=1376&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=1352&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2105&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2106&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2102&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2103&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2104&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2108&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2109&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2111&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2136&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2113&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2116&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2115&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2118&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2119&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2120&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2121&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2127&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2130&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2138&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2139&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2134&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2101&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2100&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2107&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2110&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2112&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2114&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2131&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2132&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2142&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2117&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2122&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2123&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2128&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2126&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2129&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2137&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2140&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2141&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2133&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2143&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2144&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2135&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2124&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2125&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=&area=2144&jobterm=0&do=1&stype=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=%E5%BC%80%E5%8F%91+-%E5%9C%B0%E4%BA%A7+-%E9%94%80%E5%94%AE+%E6%A0%A1%E6%8B%9B&start=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=%E5%BC%80%E5%8F%91+-%E5%9C%B0%E4%BA%A7+-%E9%94%80%E5%94%AE+%E6%A0%A1%E5%9B%AD%E6%8B%9B%E8%81%98&start=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=%E7%A0%94%E5%8F%91+-%E5%9C%B0%E4%BA%A7+-%E9%94%80%E5%94%AE+%E6%A0%A1%E6%8B%9B&start=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=%E7%A0%94%E5%8F%91+-%E5%9C%B0%E4%BA%A7+-%E9%94%80%E5%94%AE+%E6%A0%A1%E5%9B%AD%E6%8B%9B%E8%81%98&start=0&sort=date&period=4',
+        'http://s.yingjiesheng.com/search.php?word=%E5%BC%80%E5%8F%91+-%E5%9C%B0%E4%BA%A7+-%E9%94%80%E5%94%AE&area=0&sort=date&period=4',
+    ]
     def start_requests(self):
         for page in self.start_url:
             yield Request(
@@ -53,7 +99,8 @@ class YjsSpider(scrapy.Spider):
         """
         # 获取数据部分
         post_part = response.xpath("//ul[contains(@class,'searchResult')]/li")
-
+        if len(post_part) == 0:
+            yield None
         for post_node in post_part:
             # 标题
             title_selector = post_node.xpath("div/h3/a")
