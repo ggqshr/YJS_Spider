@@ -128,3 +128,10 @@ apiUrl = "http://api.xdaili.cn/xdaili-api//greatRecharge/getGreatIp?spiderId=d46
 from threading import Lock
 
 lock = Lock()
+
+# 和邮件相关
+MYEXT_ENABLED = True
+MAIL_HOST = 'smtp.qq.com'
+MAIL_PORT = 465
+MAIL_USER = '942490944@qq.com'
+MAIL_PASS = 'ijmbixectujobeei'
