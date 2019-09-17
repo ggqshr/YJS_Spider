@@ -10,6 +10,7 @@ from YJS.items import YjsItemLoader, YjsOtherItem, YjsSelfItem, YjsItem
 import pysnooper
 import locale
 import random
+from urllib.parse import quote
 
 locale.setlocale(locale.LC_CTYPE, 'chinese')
 
@@ -17,7 +18,11 @@ locale.setlocale(locale.LC_CTYPE, 'chinese')
 class YjsSpider(scrapy.Spider):
     name = 'yjs'
     allowed_domains = ['yingjiesheng.com']
-
+    industry_list = ['互联网·电商', '网络游戏', '计算机软件', 'IT服务', '电子', '通信工程', '计算机硬件', '建筑工程', '规划设计', '房地产服务', '银行', '保险',
+                     '投资', '会计/审计', '信托/担保/拍卖/典当', '快消品', '批发零售', '服装服饰', '家电业', '办公设备', '奢侈品收藏品', '工艺品珠宝玩具', '汽车·摩托车',
+                     '机械制造', '印刷·包装·造纸', '原材料加工', '工业自动化', '生物制药工程', '医疗保健·美容', '医疗器械', '能源·水利', '化工行业', '采掘·冶炼',
+                     '环保行业', '新能源', '专业咨询', '中介服务', '外包服务', '检测认证', '旅游酒店餐饮', '娱乐休闲', '租赁服务', '广告会展', '影视文化', '教育培训',
+                     '运输物流', '进出口贸易', '航空航天', '政府机构', '农林牧渔', '其他行业']
     start_url = [
         'http://s.yingjiesheng.com/search.php?word=&area=1999&jobterm=0&do=1&stype=0&sort=date&period=4',
         'http://s.yingjiesheng.com/search.php?word=&area=1349&jobterm=0&do=1&stype=0&sort=date&period=4',
@@ -80,7 +85,10 @@ class YjsSpider(scrapy.Spider):
         'http://s.yingjiesheng.com/search.php?word=%E7%A0%94%E5%8F%91+-%E5%9C%B0%E4%BA%A7+-%E9%94%80%E5%94%AE+%E6%A0%A1%E5%9B%AD%E6%8B%9B%E8%81%98&start=0&sort=date&period=4',
         'http://s.yingjiesheng.com/search.php?word=%E5%BC%80%E5%8F%91+-%E5%9C%B0%E4%BA%A7+-%E9%94%80%E5%94%AE&area=0&sort=date&period=4',
     ]
+
     def start_requests(self):
+        for industry in self.industry_list:
+            self.start_url.append(f"http://s.yingjiesheng.com/search.php?word={quote(industry)}&sort=date&period=4")
         for page in self.start_url:
             yield Request(
                 url=page,
