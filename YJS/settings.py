@@ -118,12 +118,12 @@ logging.basicConfig(
 REDIS_HOST = "116.56.140.202"
 REDIS_PORT = 6379
 
-MODE = "YAO"  # or YAO
+MODE = "LOCAL"  # or YAO
 
 MONGODB_HOST = "116.56.140.202"
 MONGODB_PORT = 27017
 
-apiUrl = "http://api.xdaili.cn/xdaili-api//greatRecharge/getGreatIp?spiderId=d460f14ed5ae426e8a7164005c61b9e7&orderno=YZ20196121637TQppQw&returnType=1&count=3"
+apiUrl = "http://api.xdaili.cn/xdaili-api//greatRecharge/getGreatIp?spiderId=2eeedc14918546f087abcddafd5ee37d&orderno=YZ20195179329mb51zm&returnType=1&count=3"
 
 from threading import Lock
 
