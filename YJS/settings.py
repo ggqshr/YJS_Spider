@@ -10,6 +10,8 @@
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 from logging import INFO
 
+from proxy_pool import IpPool
+
 BOT_NAME = 'YJS'
 
 SPIDER_MODULES = ['YJS.spiders']
@@ -123,11 +125,8 @@ MODE = "YAO"  # or YAO
 MONGODB_HOST = "116.56.140.202"
 MONGODB_PORT = 27017
 
-apiUrl = "http://api.xdaili.cn/xdaili-api//greatRecharge/getGreatIp?spiderId=2eeedc14918546f087abcddafd5ee37d&orderno=YZ20195179329mb51zm&returnType=1&count=3"
-
-from threading import Lock
-
-lock = Lock()
+apiUrl = "http://api.xdaili.cn/xdaili-api//greatRecharge/getGreatIp?spiderId=2eeedc14918546f087abcddafd5ee37d&orderno=YZ20196121637TQppQw&returnType=2&count=5"
+ip_pool = IpPool(apiUrl)
 
 # 和邮件相关
 MYEXT_ENABLED = True
