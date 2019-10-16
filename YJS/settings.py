@@ -125,7 +125,7 @@ MODE = "YAO"  # or YAO
 MONGODB_HOST = "116.56.140.202"
 MONGODB_PORT = 27017
 
-apiUrl = "http://api.xdaili.cn/xdaili-api//greatRecharge/getGreatIp?spiderId=2eeedc14918546f087abcddafd5ee37d&orderno=YZ20196121637TQppQw&returnType=2&count=5"
+apiUrl = "http://api.xdaili.cn/xdaili-api//greatRecharge/getGreatIp?spiderId=2eeedc14918546f087abcddafd5ee37d&orderno=YZ20196121637TQppQw&returnType=2&count=3"
 ip_pool = IpPool(apiUrl)
 
 # 和邮件相关
