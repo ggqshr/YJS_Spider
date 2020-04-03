@@ -134,3 +134,6 @@ MAIL_HOST = 'smtp.qq.com'
 MAIL_PORT = 465
 MAIL_USER = '942490944@qq.com'
 MAIL_PASS = 'ijmbixectujobeei'
+
+MONGODB_USER = "jason#619"
+MONGODB_PASSWORD = "jason#619"
