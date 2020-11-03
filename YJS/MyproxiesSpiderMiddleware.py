@@ -53,13 +53,13 @@ class MyproxiesSpiderMiddleware(object):
             spider.logger.info(f'{response.status},{response.url}')
         # 如果ip已被封禁，就采取措施
         if response.status == 403:
-            ip_pool.report_baned_ip(this_res_proxy)
+            ip_pool.report_ban_ip(this_res_proxy)
             thisip = ip_pool.get_ip()
             request.meta['proxy'] = "http://" + thisip
             return request
 
         if response.status == 408 or response.status == 502 or response.status == 503:
-            ip_pool.report_baned_ip(this_res_proxy)
+            ip_pool.report_ban_ip(this_res_proxy)
             request.meta['proxy'] = "http://" + ip_pool.get_ip()
             return request
         return response
@@ -71,7 +71,7 @@ class MyproxiesSpiderMiddleware(object):
         if isinstance(exception,
                       (ConnectionRefusedError, TCPTimedOutError, TimeoutError, ConnectionLost, ResponseNeverReceived)):
             this_bad_ip = request.meta['proxy'].replace("http://", "")
-            ip_pool.report_bad_net_ip(this_bad_ip)
+            ip_pool.report_bad_ip(this_bad_ip)
         spider.logger.warn(f"{type(exception)} {exception},{request.url}")
         thisip = ip_pool.get_ip()
         request.meta['proxy'] = "http://" + thisip

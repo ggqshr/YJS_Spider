@@ -10,7 +10,7 @@
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 from logging import INFO
 
-from proxy_pool import IpPool
+from proxy_pool_redis import XunProxyPool
 
 BOT_NAME = 'YJS'
 
@@ -126,7 +126,7 @@ MONGODB_HOST = "116.56.140.202"
 MONGODB_PORT = 27017
 
 apiUrl = "http://api.xdaili.cn/xdaili-api//greatRecharge/getGreatIp?spiderId=2eeedc14918546f087abcddafd5ee37d&orderno=YZ20196121637TQppQw&returnType=2&count=3"
-ip_pool = IpPool(apiUrl)
+ip_pool = XunProxyPool(api_url=apiUrl,name='yjs',redis_host="47.94.45.55",redis_port=6379,redis_password="b7310",log_level=INFO)
 
 # 和邮件相关
 MYEXT_ENABLED = True
