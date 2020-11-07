@@ -12,7 +12,7 @@ import locale
 import random
 from urllib.parse import quote
 
-locale.setlocale(locale.LC_CTYPE, 'chinese')
+#locale.setlocale(locale.LC_CTYPE, 'chinese')
 
 
 class YjsSpider(scrapy.Spider):
