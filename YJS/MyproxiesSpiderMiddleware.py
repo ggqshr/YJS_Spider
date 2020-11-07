@@ -1,7 +1,7 @@
 import random
 
 import requests
-from proxy_pool.ip_pool import ReachMaxException
+from proxy_pool_redis.XunProxyPool import ReachMaxException
 from scrapy import signals, Request
 from scrapy.http import Response
 from twisted.web._newclient import ResponseNeverReceived

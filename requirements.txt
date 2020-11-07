@@ -1,8 +1,7 @@
 proxy_pool_redis
-requests
-PySnooper
-redis
-Scrapy
 pymongo
+Scrapy
+redis
+PySnooper
 Twisted
-proxy_pool
+requests
