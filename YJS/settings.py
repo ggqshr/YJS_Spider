@@ -117,13 +117,13 @@ logging.basicConfig(
     format='%(asctime)s %(name)s %(levelname)s %(message)s'
 )
 
-REDIS_HOST = "116.56.140.202"
-REDIS_PORT = 6379
+REDIS_HOST = "47.94.45.55"
+REDIS_PORT = 9879
 
 MODE = "YAO"  # or YAO
 
-MONGODB_HOST = "116.56.140.202"
-MONGODB_PORT = 27017
+MONGODB_HOST = "47.94.45.55"
+MONGODB_PORT = 9878
 
 apiUrl = "http://api.xdaili.cn/xdaili-api//greatRecharge/getGreatIp?spiderId=2eeedc14918546f087abcddafd5ee37d&orderno=YZ20196121637TQppQw&returnType=2&count=3"
 ip_pool = XunProxyPool(api_url=apiUrl,name='yjs',redis_host="47.94.45.55",redis_port=6379,redis_password="b7310",log_level=INFO)

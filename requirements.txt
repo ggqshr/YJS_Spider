@@ -1,0 +1,9 @@
+proxy_pool_redis
+requests
+PySnooper
+ggq_proxy_pool
+redis
+Scrapy
+pymongo
+Twisted
+proxy_pool
