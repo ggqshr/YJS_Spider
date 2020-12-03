@@ -113,7 +113,7 @@ configure_logging(install_root_handler=False)
 logging.basicConfig(
     level=logging.DEBUG,
     handlers=[
-        RotatingFileHandler(filename='logs/YJS{}.log'.format(datetime.now().strftime("%Y.%m.%d")), encoding='utf-8')],
+        RotatingFileHandler(filename='logs/YJS{}.log'.format(datetime.now().strftime("%Y.%m.%d")), encoding='utf-8',backupCount=3)],
     format='%(asctime)s %(name)s %(levelname)s %(message)s'
 )
 
