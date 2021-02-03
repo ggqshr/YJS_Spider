@@ -116,7 +116,7 @@ class YjsSpider(scrapy.Spider):
             # 信息来源
             tag_original = post_node.xpath("div/p/text()").extract_first('')
             tag_deal = tag_original.replace(' ', '').replace('\r\n', '')
-            tag_obj = re.match(".*?\：(.*)", tag_deal)
+            tag_obj = re.match(r".*?：(.*)", tag_deal)
             if tag_obj:
                 tag = tag_obj.group(1)
             else:
