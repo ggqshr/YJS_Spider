@@ -137,6 +137,6 @@ class YjsItem(scrapy.Item):
     company_size = scrapy.Field()
     company_nature = scrapy.Field()
     company_industry = scrapy.Field()
-    job_number = scrapy.Field()
+    job_number = scrapy.Field(input_processor=MapCompose(replace_all_n))
     place = scrapy.Field(input_processor=MapCompose(replace_all_n))
     company_intro = scrapy.Field(input_processor=MapCompose(replace_all_n))

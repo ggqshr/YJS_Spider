@@ -152,13 +152,13 @@ class YjsSpider(scrapy.Spider):
         item_loader.add_value("link", response.url)
         tag = response.meta.get("tag", "")
         item_loader.add_value("place", tag.split("|")[-1] if tag != "" else "空")
-        item_loader.add_xpath("company_name", "//div[contains(@class,'mleft')]/h1/text()")
-        item_loader.add_xpath("post_time", "//div[contains(@class,'info clearfix')]/ol/li[text()='发布时间：']/u/text()")
-        item_loader.add_xpath("job_nature", "//div[contains(@class,'info clearfix')]/ol/li[text()='职位类型：']/u/text()")
-        item_loader.add_xpath("job_place", "//div[contains(@class,'info clearfix')]/ol/li[text()='工作地点：']/u/text()")
+        item_loader.add_xpath("company_name", '//div[@class="comtit clear"]/h1/text()')
+        item_loader.add_xpath("post_time", "//p[@class='sub clear']//em[text()='发布时间：']/../span/text()")
+        item_loader.add_xpath("job_nature", "//p[@class='sub clear']//em[text()='职位类型：']/../span/text()")
+        item_loader.add_xpath("job_place", "//p[@class='sub clear']//em[text()='工作地点：']/../span/text()")
         item_loader.add_value("job_content",
-                              response.xpath("//div[contains(@class,'job')]").xpath("string(.)").extract_first(""))
-        item_loader.add_xpath("job_name", "//div[contains(@class,'info clearfix')]/ol/li[text()='职位：']/u/text()")
+                              response.xpath("//div[@class='inf']").xpath("string(.)").extract_first(""))
+        item_loader.add_xpath("job_name", "//p[@class='sub clear']//em[text()='职位：']/../b/text()")
         post_time = item_loader.get_output_value("post_time") if item_loader.get_output_value(
             "post_time") is not None else time.ctime()
         company_name = item_loader.get_output_value("company_name")
@@ -178,10 +178,7 @@ class YjsSpider(scrapy.Spider):
     # 本站数据详情获取
     def pars_self(self, response):
 
-        company_intro_obj = response.xpath("//div[contains(@class,'main')]/div[4]/p")
-        company_intro = ''
-        for intro_node in company_intro_obj:
-            company_intro += intro_node.xpath("text()").extract_first()
+        company_intro = response.xpath('string((//div[@class="inf"])[2])')
 
         location_obj = response.xpath(
             "//div[contains(@class,'main')]/div[2]/div[contains(@class,'job_list')]/ul/li[1]/span")
@@ -193,29 +190,25 @@ class YjsSpider(scrapy.Spider):
         item_loader.add_value("link", response.url)
         tag = response.meta.get("tag", "")
         item_loader.add_value("place", tag.split("|")[-1] if tag != "" else "空")
-        item_loader.add_xpath("company_name", "//div[contains(@class,'main')]/div[1]/h1/a/text()")
-        item_loader.add_xpath("company_industry", "//div[contains(@class,'main')]/div[1]/ul/li[1]/span/text()")
-        item_loader.add_xpath("company_size", "//div[contains(@class,'main')]/div[1]/ul/li[2]/span/text()")
-        item_loader.add_xpath("company_nature", "//div[contains(@class,'main')]/div[1]/ul/li[3]/span/text()")
-        item_loader.add_value("job_name", response.xpath("//div[contains(@class,'main')]/div[2]/h2").xpath(
-            "string(.)").extract_first())
+        item_loader.add_xpath("company_name", '//div[@class="sidebox"]//div[@class="msg"]//span/text()')
+        item_loader.add_xpath("company_industry", '//div[@class="sidebox"]//div[@class="inf"]//em[text()="所属行业："]/../span/text()')
+        item_loader.add_xpath("company_size", '//div[@class="sidebox"]//div[@class="inf"]//em[text()="所属行业："]/../span/text()')
+        item_loader.add_xpath("company_nature", '//div[@class="sidebox"]//div[@class="inf"]//em[text()="所属行业："]/../span/text()')
+        item_loader.add_xpath("job_name", '//div[@class="comtit"]/h1/a/text()')
         item_loader.add_value("job_place", location)
-        valid_date = response.xpath(
-            "//div[contains(@class,'main')]/div[2]/div[contains(@class,'job_list')]/ul/li[2]/span/text()").extract_first()
+        valid_date = response.xpath('//p[@class="sub clear"]//em[text()="有效日期："]/../span/text()').extract_first()
         timeformat = time.strptime(valid_date.split("至")[-2].strip(), "%Y年%m月%d日") if valid_date is not None else "空"
         item_loader.add_value("post_time",
                               time.strftime("%Y-%m-%d",
                                             timeformat) if valid_date is not None else datetime.now().strftime(
                                   "%Y-%m-%d"))
         item_loader.add_xpath("job_number",
-                              "//div[contains(@class,'main')]/div[2]/div[contains(@class,'job_list')]/ul/li[3]/span/text()")
+                              '//p[@class="sub clear"]//em[text()="招聘人数："]/../span/text()')
         item_loader.add_xpath("job_nature",
-                              "//div[contains(@class,'main')]/div[2]/div[contains(@class,'job_list')]/ul/li[4]/text()")
-        item_loader.add_value("job_content", response.xpath(
-            "//div[contains(@class,'main')]/div[2]/div[contains(@class,'job_list')]/div[contains(@class,'j_i')]").xpath(
-            "string(.)").extract_first())
+                              '//p[@class="sub clear"]//em[text()="职位性质："]/../span/text()')
+        item_loader.add_xpath("job_content", 'string((//div[@class="inf"])[1])')
         item_loader.add_value("company_intro", company_intro)
-        item_loader.add_xpath("company_homepage", "//div[contains(@class,'main')]/div[4]/ul/li/a/text()")
+        item_loader.add_value("company_homepage", parse.urljoin(response.url,response.xpath('//div[@class="sidebox"]//div[@class="msg"]/a/@href').extract_first()))
         try:
             item_loader.add_value("id", item_loader.get_output_value("company_name") + item_loader.get_output_value(
                 "job_name") + item_loader.get_output_value("post_time"))
