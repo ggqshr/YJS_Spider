@@ -130,6 +130,7 @@ class YjsItem(scrapy.Item):
     job_name = scrapy.Field(input_processor=Join())
     company_name = scrapy.Field()
     post_time = scrapy.Field(output_processor=Compose(process_time, TakeFirst()))
+    effective_time = scrapy.Field()
     job_place = scrapy.Field()
     job_nature = scrapy.Field()
     job_content = scrapy.Field(input_processor=MapCompose(replace_all_n))

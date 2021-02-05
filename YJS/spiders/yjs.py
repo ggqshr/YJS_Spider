@@ -6,6 +6,8 @@ import scrapy
 from scrapy.http import Request
 from urllib import parse
 import time
+
+from scrapy.loader import ItemLoader
 from YJS.items import YjsItemLoader, YjsOtherItem, YjsSelfItem, YjsItem
 import pysnooper
 import locale
@@ -198,6 +200,9 @@ class YjsSpider(scrapy.Spider):
         item_loader.add_value("job_place", location)
         valid_date = response.xpath('//p[@class="sub clear"]//em[text()="有效日期："]/../span/text()').extract_first()
         timeformat = time.strptime(valid_date.split("至")[-2].strip(), "%Y年%m月%d日") if valid_date is not None else "空"
+        effective_time = time.strptime(valid_date.split("至")[-1].strip(), "%Y年%m月%d日") if valid_date is not None else "空"
+        item_loader.add_value("effective_time",time.strftime("%Y-%m-%d",
+                                            effective_time) if valid_date is not None else "空")
         item_loader.add_value("post_time",
                               time.strftime("%Y-%m-%d",
                                             timeformat) if valid_date is not None else datetime.now().strftime(
