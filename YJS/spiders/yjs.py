@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 from typing import List
+import itemloaders
 
 import scrapy
 from scrapy.http import Request
@@ -175,6 +176,8 @@ class YjsSpider(scrapy.Spider):
         for f in yjs_other_item.fields.keys():
             if f not in dict(yjs_other_item):
                 yjs_other_item.setdefault(f, "空")
+        if yjs_other_item.get("post_time","空") == "空":
+            yjs_other_item['post_time'] = datetime.now().strftime("%Y-%m-%d")
         yield yjs_other_item
 
     # 本站数据详情获取
@@ -220,4 +223,6 @@ class YjsSpider(scrapy.Spider):
         except TypeError:
             item_loader.add_value("id", str(random.random()))
         yjs_self_item = item_loader.load_item()
+        if yjs_self_item.get("post_time","空") == "空":
+            yjs_self_item['post_time'] = datetime.now().strftime("%Y-%m-%d")
         yield yjs_self_item
