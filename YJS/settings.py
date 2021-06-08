@@ -118,7 +118,7 @@ logging.basicConfig(
 )
 
 REDIS_HOST = "47.94.45.55"
-REDIS_PORT = 9879
+REDIS_PORT = 6379
 
 MODE = "YAO"  # or YAO
 

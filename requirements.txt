@@ -7,3 +7,4 @@ Twisted
 requests
 dataclasses
 pyyaml
+redisbloom
