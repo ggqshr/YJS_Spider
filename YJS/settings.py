@@ -116,14 +116,13 @@ logging.basicConfig(
         RotatingFileHandler(filename='logs/YJS{}.log'.format(datetime.now().strftime("%Y.%m.%d")), encoding='utf-8',backupCount=3)],
     format='%(asctime)s %(name)s %(levelname)s %(message)s'
 )
-
-REDIS_HOST = "47.94.45.55"
+REDIS_HOST = "0.0.0.0"
 REDIS_PORT = 6379
 
 MODE = "YAO"  # or YAO
 
-MONGODB_HOST = "47.94.45.55"
-MONGODB_PORT = 9878
+MONGODB_HOST = "0.0.0.0"
+MONGODB_PORT = 10021
 
 apiUrl = "http://api.xdaili.cn/xdaili-api//greatRecharge/getGreatIp?spiderId=2eeedc14918546f087abcddafd5ee37d&orderno=YZ20196121637TQppQw&returnType=2&count=3"
 ip_pool = XunProxyPool(api_url=apiUrl,name='yjs',redis_host="47.94.45.55",redis_port=6379,redis_password="b7310",log_level=INFO,scan_timeout_ip=True)
