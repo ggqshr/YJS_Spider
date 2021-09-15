@@ -125,7 +125,7 @@ MONGODB_HOST = "gateway"
 MONGODB_PORT = 10021
 
 apiUrl = "http://api.xdaili.cn/xdaili-api//greatRecharge/getGreatIp?spiderId=2eeedc14918546f087abcddafd5ee37d&orderno=YZ20196121637TQppQw&returnType=2&count=3"
-ip_pool = XunProxyPool(api_url=apiUrl,name='yjs',redis_host="47.94.45.55",redis_port=6379,redis_password="b7310",log_level=INFO,scan_timeout_ip=True)
+ip_pool = XunProxyPool(api_url=apiUrl,name='yjs',redis_host=REDIS_HOST,redis_port=REDIS_PORT,redis_password="b7310",log_level=INFO,scan_timeout_ip=True)
 
 # 和邮件相关
 MYEXT_ENABLED = True
