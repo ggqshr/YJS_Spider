@@ -102,7 +102,7 @@ LOG_LEVEL = INFO
 
 from scrapy.utils.log import configure_logging
 import logging
-from logging.handlers import RotatingFileHandler
+from logging.handlers import RotatingFileHandler, TimedRotatingFileHandler
 from datetime import datetime
 import os
 
@@ -113,7 +113,7 @@ configure_logging(install_root_handler=False)
 logging.basicConfig(
     level=logging.DEBUG,
     handlers=[
-        RotatingFileHandler(filename='logs/YJS{}.log'.format(datetime.now().strftime("%Y.%m.%d")), encoding='utf-8',backupCount=3)],
+        TimedRotatingFileHandler(filename='logs/YJS.log', encoding='utf-8', when="D", interval=1,backupCount=3)],
     format='%(asctime)s %(name)s %(levelname)s %(message)s'
 )
 REDIS_HOST = "redis"
