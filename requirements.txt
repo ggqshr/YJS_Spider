@@ -1,5 +1,5 @@
 proxy_pool_redis
-pymongo
+pymongo==3.9
 Scrapy
 redis
 PySnooper
