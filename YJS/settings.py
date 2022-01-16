@@ -124,7 +124,7 @@ MODE = "YAO"  # or YAO
 MONGODB_HOST = "gateway"
 MONGODB_PORT = 10021
 
-apiUrl = "http://api.xdaili.cn/xdaili-api//greatRecharge/getGreatIp?spiderId=2eeedc14918546f087abcddafd5ee37d&orderno=YZ20196121637TQppQw&returnType=2&count=3"
+apiUrl = "http://dps.kdlapi.com/api/getdps/?orderid=914233167437767&num=3&pt=1&dedup=1&format=json&sep=1"
 ip_pool = KuaiProxyPool(api_url=apiUrl,name='yjs',redis_host=REDIS_HOST,redis_port=REDIS_PORT,redis_password="b7310",log_level=INFO,scan_timeout_ip=True)
 
 # 和邮件相关
